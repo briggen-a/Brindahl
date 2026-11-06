@@ -68,6 +68,7 @@ export default function App() {
   const [modal, setModal] = useState(null);
   const taps = useRef(0);
   const previousPage = useRef(page);
+  const keyboardActivation = useRef(false);
   const [outgoing, setOutgoing] = useState(null);
   const firstRender = useRef(true);
   const main = useRef(null);
@@ -98,7 +99,7 @@ export default function App() {
     taps.current = 0;
     if (firstRender.current) { firstRender.current = false; return; }
     window.scrollTo({ top: 0, behavior: 'instant' });
-    const returnLink = page === 'home' && people[previousPage.current]
+    const returnLink = keyboardActivation.current && page === 'home' && people[previousPage.current]
       ? main.current?.querySelector('.standing-character--' + previousPage.current) : null;
     (returnLink || main.current?.querySelector('h1'))?.focus({ preventScroll: true });
   }, [page]);
@@ -120,7 +121,12 @@ export default function App() {
         </div>
       </div>
     </div>}
-    <main key={page} id="archive-content" ref={main} className={`archive-shell archive-shell--${page}${outgoing ? ' incoming-screen' : ''}`}>
+    <main key={page} id="archive-content" ref={main}
+      onClickCapture={event => {
+        // Keyboard and assistive activations have a zero click count.
+        keyboardActivation.current = event.detail === 0;
+      }}
+      className={`archive-shell archive-shell--${page}${outgoing ? ' incoming-screen' : ''}`}>
       {page === 'home' ? <Landing onPlanetTap={tapPlanet} /> : people[page] ? <Dossier page={page} /> : page === 'guestbook' ? <Guestbook /> : <Secrets onReveal={() => setModal('bishop')} />}
     </main>
     {modal === 'bishop' && <Modal title="The Bishop encounter" onClose={() => setModal(null)}><p className="eyebrow">Temporal anomaly · 4876</p><p>At a geriatric dance party on Bishop, Duchess Lhadnik found Duke Mahgirb apparently studying the emergency exits. She invited him to dance.</p><p>The Duke insists he was only there for the refreshments.</p><a className="text-button" href="#/duchess" onClick={() => setModal(null)}>Read the Duchess’s account</a><button className="text-button" type="button" onClick={() => setModal(null)}>Reseal the archive</button></Modal>}
