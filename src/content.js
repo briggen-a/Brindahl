@@ -18,16 +18,15 @@ export const people = {
   },
 };
 
-// References are NOT app assets. Populate only with approved standalone art.
+// User-approved extractions of the exact master. See public/artwork/provenance.json.
+// Hero is intentionally one composition, not independently movable people/planet.
 export const artwork = {
-  environment: { src: null, label: 'Planet & waterfalls', detail: 'Standalone artwork needed', alt: 'The lush planet Brindahl with monumental architecture and waterfalls.' },
-  dukeStanding: { src: null, label: 'Duke', detail: 'Full-length photo needed', alt: 'Duke Mahgirb standing in his imperial costume.' },
-  duchessStanding: { src: null, label: 'Duchess', detail: 'Full-length photo needed', alt: 'Duchess Lhadnik standing in her imperial costume.' },
-  dukePortrait: { src: null, label: 'Duke portrait', detail: 'Portrait artwork needed', alt: 'Duke Mahgirb in imperial dress.' },
-  duchessPortrait: { src: null, label: 'Duchess portrait', detail: 'Portrait artwork needed', alt: 'Duchess Lhadnik in imperial dress.' },
-  seal: { src: null, label: 'B/K seal', detail: 'Approved source needed', alt: 'The ornate intertwined B and K imperial seal.' },
-  bishop: { src: null, label: 'Bishop encounter', detail: 'Standalone scene needed', alt: 'The Duke and Duchess outside the dance hall on Bishop.' },
-  avelis: { src: null, label: 'Avelis landscape', detail: 'Standalone scene needed', alt: 'The distant Avelis System.' },
+  hero: { src: '/artwork/brindahl-hero.webp', width: 492, height: 605, alt: 'Duke Mahgirb and Duchess Lhadnik stand side by side in full imperial dress before Brindahl, its waterfalls and cities. The B/K seal rests at their feet.' },
+  dukePortrait: { src: '/artwork/duke-portrait.png', width: 175, height: 560, alt: 'Duke Mahgirb in black and gold imperial dress.' },
+  duchessPortrait: { src: '/artwork/duchess-portrait.png', width: 170, height: 554, alt: 'Duchess Lhadnik in black and gold imperial dress.' },
+  seal: { src: '/artwork/house-seal.webp', width: 76, height: 70, alt: 'The ornate intertwined B and K imperial seal.' },
+  bishop: { src: '/artwork/bishop-scene.webp', width: 336, height: 145, alt: 'The Duke and Duchess outside the illuminated dance hall on Bishop.' },
+  avelis: { src: '/artwork/avelis-scene.webp', width: 315, height: 62, alt: 'Avelis: distant mountains and a city beneath the night sky.' },
 };
 
 export const routes = ['home', 'duke', 'duchess', 'guestbook', 'secrets'];

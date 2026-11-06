@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Fingerprint, Globe, Heart, List, Martini, Planet } from '@phosphor-icons/react';
 import { people, routeFromHash } from './content.js';
-import { ArtSlot, BottomNav, DossierNavigation, GuestbookLink, HouseHeader, Modal, Panel, navigation } from './components.jsx';
+import { Artwork, BottomNav, DossierNavigation, GuestbookLink, HouseHeader, Modal, Panel, navigation } from './components.jsx';
 
 function Landing({ onMenu, onPlanetTap }) {
   return <>
@@ -11,14 +11,12 @@ function Landing({ onMenu, onPlanetTap }) {
       <h1 tabIndex={-1}>Brindahl</h1>
       <p className="tagline">Dance <span>•</span> Travel <span>•</span> Avoid invasion</p>
     </header>
-    <div className="landing-scene" aria-label="Brindahl and the imperial couple">
-      <button className="planet-target" type="button" onClick={onPlanetTap} aria-label="Explore planet Brindahl"><ArtSlot asset="environment" /></button>
-      <div className="standing-couple">
-        {['duke', 'duchess'].map(person => <a className={`standing-character standing-character--${person}`} key={person} href={`#/${person}`} aria-label={`Open ${people[person].title} ${people[person].name} dossier`}>
-          <ArtSlot asset={`${person}Standing`} /><span className="nameplate bevel"><small>{people[person].title}</small>{people[person].name}</span>
-        </a>)}
-      </div>
-      <ArtSlot asset="seal" className="landing-seal" />
+    <div className="landing-scene">
+      <Artwork asset="hero" className="hero-artwork" priority />
+      <button className="planet-target art-link" type="button" onClick={onPlanetTap} aria-label="Explore planet Brindahl"><span className="art-link__hint">Explore Brindahl</span></button>
+      {['duke', 'duchess'].map(person => <a className={`standing-character standing-character--${person} art-link`} key={person} href={`#/${person}`} aria-label={`Open ${people[person].title} ${people[person].name} dossier`}>
+        <span className="art-link__hint">Open {people[person].title} dossier</span>
+      </a>)}
     </div>
     <GuestbookLink /><BottomNav page="home" />
     <p className="hero-subline">Two worlds. One dynasty.<br />An extremely consequential dance.</p>
@@ -30,7 +28,7 @@ function Dossier({ page }) {
   return <>
     <HouseHeader />
     <article className={`dossier dossier--${page}`} aria-labelledby="person-name">
-      <ArtSlot asset={`${page}Portrait`} className="dossier-portrait" />
+      <Artwork asset={`${page}Portrait`} className="dossier-portrait" priority />
       <div className="dossier-summary">
         <div className="dossier-title bevel"><h1 id="person-name" tabIndex={-1}><span>{person.title}</span>{person.name}</h1><p className="classification">{person.classification}</p></div>
         <dl className="person-facts"><div><dt>Origin</dt><dd>{person.origin}<span>({person.originDetail})</span></dd></div><div><dt>Role</dt><dd>{person.role}</dd></div></dl>
@@ -39,7 +37,7 @@ function Dossier({ page }) {
       {page === 'duke' ? <Panel title="Notable exploits" className="person-extras"><ul className="exploits">{person.exploits.map(exploit => <li key={exploit}>{exploit}</li>)}</ul></Panel> :
         <Panel title="At a glance" className="person-extras"><ul className="at-a-glance">{[[Globe, 'Dance enthusiast'], [Planet, 'Galactic traveler'], [Martini, 'Beverage connoisseur'], [Heart, 'Keeps the Duke in line']].map(([Icon, label]) => <li key={label}><Icon weight="thin" size={30} aria-hidden="true" /><span>{label}</span></li>)}</ul></Panel>}
       {person.quote && <blockquote>“{person.quote}”<cite>— Duchess Lhadnik</cite></blockquote>}
-      <ArtSlot asset={page === 'duke' ? 'bishop' : 'avelis'} className="dossier-landscape" />
+      <Artwork asset={page === 'duke' ? 'bishop' : 'avelis'} className="dossier-landscape" />
     </article>
     <DossierNavigation page={page} />
   </>;

@@ -14,19 +14,11 @@ The production entry is `index.html`. Routes use hashes, so dossier links work o
 
 ## Current review stage
 
-Phase 1 layout and interaction foundation. **Visual fidelity is not complete or approved.** The supplied images are flattened references, not isolated assets. The app deliberately displays labeled slots for missing art. It does not display the reference screenshots as its interface, recreate the planet/people in CSS, or generate replacement imagery.
+The landing page and both dossiers use approved master artwork. The owner authorized cropping, masking, and publishing the resulting assets on this review branch. The hero keeps the planet, couple, nameplates, and seal together. The biographies, navigation, and actions are HTML. Both characters link to their dossiers.
 
-- The attached handoff’s `approved_assets/references/APPROVED_MASTER.png` remains the authoritative visual reference. Reference artwork is not included in this public branch.
-- The supplied handoff defines the scope and approval gates; keep the original attachment with the design files.
-- `src/content.js`: handoff copy and approved-art integration slots.
-- `src/components.jsx`: reusable framing, navigation, asset slots, accessible dialogs.
-- `src/App.jsx`: landing, Duke, Duchess, unopened registry, and basic secrets.
-- `tests/responsive.html`: dev-only 375/390/430 px iframe review harness; not a Vite production entry.
-- `design-qa.md`: review evidence and remaining visual blockers.
+The extraction recipe is in `scripts/extract-approved-art.py`. Source bounds, masks, and the master checksum are in `public/artwork/provenance.json`. Run the script with the supplied APPROVED_MASTER.png to reproduce the assets.
 
-## Required before artwork integration
-
-Supply approved standalone planetary scenery, full-length Duke and Duchess photos/cutouts, dossier portraits, and the transparent/vector B/K seal. The Bishop/Avelis scene layers are also absent. Preserve the approved composition. Any tracing, retouching, extraction, new art, or material design deviation needs the owner's approval first.
+Use `tests/responsive.html` during development to inspect 375, 390, and 430 px phone layouts. See `design-qa.md` for the current artwork review.
 
 ## Scope and release
 

@@ -9,13 +9,11 @@ export const navigation = [
   { route: 'secrets', label: 'Secrets', Icon: Cube },
 ];
 
-export function ArtSlot({ asset, className = '', compact = false }) {
+export function Artwork({ asset, className = '', priority = false }) {
   const item = artwork[asset];
-  if (item.src) return <img className={`artwork ${className}`} src={item.src} alt={item.alt} decoding="async" />;
-  return <div className={`art-slot ${compact ? 'art-slot--compact' : ''} ${className}`} data-asset={asset}>
-    <span className="art-slot__label">{item.label}</span>
-    <span className="art-slot__detail">{item.detail}</span>
-  </div>;
+  return <img className={`artwork ${className}`} src={item.src} alt={item.alt}
+    width={item.width} height={item.height} decoding="async"
+    loading={priority ? 'eager' : 'lazy'} fetchPriority={priority ? 'high' : undefined} />;
 }
 
 export function BottomNav({ page }) {
@@ -29,7 +27,7 @@ export function BottomNav({ page }) {
 export function HouseHeader() {
   return <header className="house-header">
     <a className="back-link" href="#/home"><CaretLeft size={24} weight="light" aria-hidden="true" /> <span>Back</span></a>
-    <a href="#/home" className="house-seal" aria-label="Return to Brindahl"><ArtSlot asset="seal" compact /></a>
+    <a href="#/home" className="house-seal" aria-label="Return to Brindahl"><Artwork asset="seal" priority /></a>
     <p>House Mahgirb<br /><span>of Brindahl</span></p>
   </header>;
 }
