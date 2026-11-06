@@ -162,10 +162,6 @@ p, li, dd { overflow-wrap: break-word; }
 .dossier-back svg { width: 20px; height: 20px; }
 .archive-shell--duke .dossier-back { right: env(safe-area-inset-right, 0px); }
 .archive-shell--duchess .dossier-back { left: env(safe-area-inset-left, 0px); }
-@media (max-width: 599px) {
-  .archive-shell--duke .dossier { margin-right: 34px; }
-  .archive-shell--duchess .dossier { margin-left: 40px; }
-}
 :root[data-slide="left"] { --slide-in: -100%; --slide-out: 100%; }
 :root[data-slide="right"] { --slide-in: 100%; --slide-out: -100%; }
 @keyframes archive-enter { from { transform: translateX(var(--slide-in)); } to { transform: none; } }
