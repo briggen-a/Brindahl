@@ -22,6 +22,8 @@ Use `tests/responsive.html` during development to inspect 375, 390, and 430 px p
 
 ## Scope and release
 
-Guestbook data collection, uploads, moderation, authentication, and service provisioning belong to Phase 3. This build collects no guest information. The QR reference is decorative; production QR encoding and phone scan testing belong to Phase 4.
+The QR reference is decorative. Production QR encoding and phone scan testing belong to Phase 4.
 
 Review on a feature-branch Vercel preview. Keep `main` and the existing production site unchanged until approved. The repo retains JSX/CSS; no stack migration.
+
+The mobile guestbook preview supports signatures, timestamps, photos and deletion. See the [ESP32-S3 party host setup](docs/party-host.md) for the shared USB edition.
