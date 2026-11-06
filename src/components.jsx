@@ -24,9 +24,9 @@ export function BottomNav({ page }) {
   </nav>;
 }
 
-export function HouseHeader() {
+export function HouseHeader({ dossier = false }) {
   return <header className="house-header">
-    <a className="back-link" href="#/home"><CaretLeft size={24} weight="light" aria-hidden="true" /> <span>Back</span></a>
+    {!dossier && <a className="back-link" href="#/home"><CaretLeft size={24} weight="light" aria-hidden="true" /> <span>Back</span></a>}
     <a href="#/home" className="house-seal" aria-label="Return to Brindahl"><Artwork asset="seal" priority /></a>
     <p>House Mahgirb<br /><span>of Brindahl</span></p>
   </header>;

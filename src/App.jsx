@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Fingerprint, Globe, Heart, List, Martini, Planet } from '@phosphor-icons/react';
+import { CaretLeft, CaretRight, Fingerprint, Globe, Heart, Martini, Planet } from '@phosphor-icons/react';
 import { people, routeFromHash } from './content.js';
-import { Artwork, BottomNav, DossierNavigation, GuestbookLink, HouseHeader, Modal, Panel, navigation } from './components.jsx';
+import { Artwork, BottomNav, DossierNavigation, GuestbookLink, HouseHeader, Modal, Panel } from './components.jsx';
 
-function Landing({ onMenu, onPlanetTap }) {
+function Landing({ onPlanetTap }) {
   return <>
     <header className="landing-header">
-      <button className="icon-button menu-trigger" type="button" onClick={onMenu} aria-label="Open archive menu"><List weight="thin" size={32} /></button>
       <p className="eyebrow">The imperial dynasty of</p>
       <h1 tabIndex={-1}>Brindahl</h1>
       <p className="tagline">Dance <span>•</span> Travel <span>•</span> Avoid invasion</p>
@@ -26,7 +25,11 @@ function Landing({ onMenu, onPlanetTap }) {
 function Dossier({ page }) {
   const person = people[page];
   return <>
-    <HouseHeader />
+    <HouseHeader dossier />
+    <a href="#/home" className="dossier-back" aria-label="Back to Brindahl">
+      {page === 'duke' ? <CaretRight aria-hidden="true" /> : <CaretLeft aria-hidden="true" />}
+      Back
+    </a>
     <article className={`dossier dossier--${page}`} aria-labelledby="person-name">
       <Artwork asset={`${page}Portrait`} className="dossier-portrait" priority />
       <div className="dossier-summary">
@@ -64,10 +67,28 @@ export default function App() {
   const [page, setPage] = useState(() => routeFromHash(window.location.hash));
   const [modal, setModal] = useState(null);
   const taps = useRef(0);
+  const previousPage = useRef(page);
+  const [outgoing, setOutgoing] = useState(null);
   const firstRender = useRef(true);
   const main = useRef(null);
   useEffect(() => {
-    const onHashChange = () => { setPage(routeFromHash(window.location.hash)); setModal(null); };
+    function onHashChange(event) {
+      const from = routeFromHash(new URL(event.oldURL).hash);
+      const to = routeFromHash(window.location.hash);
+      const order = ['duke', 'home', 'duchess'];
+      const sliding = from !== to && order.includes(from) && order.includes(to)
+        && !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const root = document.documentElement;
+      if (from === 'home') {
+        const scene = main.current?.querySelector('.landing-scene')?.getBoundingClientRect();
+        if (scene) root.style.setProperty('--return-height', (scene.top + scene.height * .48) + 'px');
+      }
+      previousPage.current = from;
+      root.dataset.slide = sliding ? (order.indexOf(to) < order.indexOf(from) ? 'left' : 'right') : '';
+      setOutgoing(sliding ? { page: from, scroll: window.scrollY } : null);
+      setPage(to);
+      setModal(null);
+    }
     window.addEventListener('hashchange', onHashChange);
     return () => window.removeEventListener('hashchange', onHashChange);
   }, []);
@@ -77,18 +98,31 @@ export default function App() {
     taps.current = 0;
     if (firstRender.current) { firstRender.current = false; return; }
     window.scrollTo({ top: 0, behavior: 'instant' });
-    main.current?.querySelector('h1')?.focus({ preventScroll: true });
+    const returnLink = page === 'home' && people[previousPage.current]
+      ? main.current?.querySelector('.standing-character--' + previousPage.current) : null;
+    (returnLink || main.current?.querySelector('h1'))?.focus({ preventScroll: true });
   }, [page]);
+  useEffect(() => {
+    if (!outgoing) return;
+    const timer = window.setTimeout(() => setOutgoing(null), 390);
+    return () => window.clearTimeout(timer);
+  }, [outgoing]);
   function tapPlanet() {
     taps.current += 1;
     if (taps.current === 5) { taps.current = 0; setModal('bishop'); }
   }
   return <>
     <a href="#archive-content" className="skip-link" onClick={event => { event.preventDefault(); main.current?.querySelector('h1')?.focus(); }}>Skip to content</a>
-    <main id="archive-content" ref={main} className={`archive-shell archive-shell--${page}`}>
-      {page === 'home' ? <Landing onMenu={() => setModal('menu')} onPlanetTap={tapPlanet} /> : people[page] ? <Dossier page={page} /> : page === 'guestbook' ? <Guestbook /> : <Secrets onReveal={() => setModal('bishop')} />}
+    {outgoing && <div className="outgoing-screen" inert aria-hidden="true">
+      <div style={{ transform: 'translateY(-' + outgoing.scroll + 'px)' }}>
+        <div className={'archive-shell archive-shell--' + outgoing.page}>
+          {outgoing.page === 'home' ? <Landing /> : <Dossier page={outgoing.page} />}
+        </div>
+      </div>
+    </div>}
+    <main key={page} id="archive-content" ref={main} className={`archive-shell archive-shell--${page}${outgoing ? ' incoming-screen' : ''}`}>
+      {page === 'home' ? <Landing onPlanetTap={tapPlanet} /> : people[page] ? <Dossier page={page} /> : page === 'guestbook' ? <Guestbook /> : <Secrets onReveal={() => setModal('bishop')} />}
     </main>
-    {modal === 'menu' && <Modal title="Imperial archives" onClose={() => setModal(null)}><nav className="menu-nav" aria-label="Archive menu">{navigation.map(({ route, label, Icon }) => <a key={route} href={`#/${route}`} onClick={() => setModal(null)}><Icon size={26} weight="thin" aria-hidden="true" />{label}</a>)}</nav></Modal>}
     {modal === 'bishop' && <Modal title="The Bishop encounter" onClose={() => setModal(null)}><p className="eyebrow">Temporal anomaly · 4876</p><p>At a geriatric dance party on Bishop, Duchess Lhadnik found Duke Mahgirb apparently studying the emergency exits. She invited him to dance.</p><p>The Duke insists he was only there for the refreshments.</p><a className="text-button" href="#/duchess" onClick={() => setModal(null)}>Read the Duchess’s account</a><button className="text-button" type="button" onClick={() => setModal(null)}>Reseal the archive</button></Modal>}
   </>;
 }
