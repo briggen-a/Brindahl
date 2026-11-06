@@ -1,0 +1,6 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Brindahl responsive review</title>
+<style>body{margin:0;background:#202528;color:#eee;font:14px Arial,sans-serif}header{padding:12px 16px;display:flex;gap:18px;align-items:center}select{font:inherit;padding:5px}main{display:flex;gap:14px;padding:0 14px;align-items:flex-start}section{flex:none}h2{font-size:12px;font-weight:normal}iframe{display:block;border:0;background:#070e12}button{font:inherit}</style>
+<header><strong>Phase 1 · responsive review</strong><label>View <select id="route"><option value="home">Landing</option><option value="duke">Duke</option><option value="duchess">Duchess</option><option value="guestbook">Guestbook</option><option value="secrets">Secrets</option></select></label></header>
+<main><section><h2>375 × 812</h2><iframe id="phone375" title="375 px phone" src="/" width="375" height="812"></iframe></section><section><h2>390 × 844</h2><iframe id="phone390" title="390 px phone" src="/" width="390" height="844"></iframe></section><section><h2>430 × 932</h2><iframe id="phone430" title="430 px phone" src="/" width="430" height="932"></iframe></section></main>
+<script>document.getElementById('route').addEventListener('change',e=>document.querySelectorAll('iframe').forEach(f=>f.src='/#/'+e.target.value));</script>
+</html>

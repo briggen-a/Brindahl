@@ -1,0 +1,342 @@
+{
+  "source": "APPROVED_MASTER.png from the user-supplied handoff",
+  "source_sha256": "191dba997698b2c3c624c87bffe74f174caab67b5b8eb04e84969a8c8c223300",
+  "source_size": [
+    1536,
+    1024
+  ],
+  "method": "Manual cropping and alpha masks only; PNG portraits and lossless WebP scenes. No generation, recoloring, retouching, or reconstructed pixels.",
+  "limitations": [
+    "Hero preserves the planet, full-body couple, seal, and baked-in character nameplates together.",
+    "Portraits contain only visible source pixels; areas hidden by original UI remain transparent.",
+    "Seals retain their original dark backgrounds; these are not vector or fully isolated logos.",
+    "Native source resolution limits sharpness on high-density screens."
+  ],
+  "assets": {
+    "brindahl-hero": {
+      "box": [
+        14,
+        174,
+        506,
+        779
+      ],
+      "width": 492,
+      "height": 605,
+      "file": "brindahl-hero.webp"
+    },
+    "duke-portrait": {
+      "box": [
+        520,
+        110,
+        695,
+        670
+      ],
+      "polygon": [
+        [
+          520,
+          250
+        ],
+        [
+          527,
+          232
+        ],
+        [
+          529,
+          181
+        ],
+        [
+          526,
+          157
+        ],
+        [
+          538,
+          134
+        ],
+        [
+          551,
+          119
+        ],
+        [
+          578,
+          112
+        ],
+        [
+          609,
+          116
+        ],
+        [
+          624,
+          129
+        ],
+        [
+          630,
+          144
+        ],
+        [
+          641,
+          151
+        ],
+        [
+          645,
+          166
+        ],
+        [
+          654,
+          179
+        ],
+        [
+          650,
+          185
+        ],
+        [
+          660,
+          199
+        ],
+        [
+          659,
+          213
+        ],
+        [
+          643,
+          232
+        ],
+        [
+          640,
+          253
+        ],
+        [
+          653,
+          239
+        ],
+        [
+          657,
+          272
+        ],
+        [
+          678,
+          287
+        ],
+        [
+          688,
+          310
+        ],
+        [
+          695,
+          431
+        ],
+        [
+          634,
+          431
+        ],
+        [
+          587,
+          462
+        ],
+        [
+          587,
+          646
+        ],
+        [
+          604,
+          665
+        ],
+        [
+          520,
+          670
+        ]
+      ],
+      "width": 175,
+      "height": 560,
+      "file": "duke-portrait.png"
+    },
+    "duchess-portrait": {
+      "box": [
+        910,
+        116,
+        1080,
+        670
+      ],
+      "polygon": [
+        [
+          910,
+          252
+        ],
+        [
+          916,
+          228
+        ],
+        [
+          911,
+          207
+        ],
+        [
+          915,
+          184
+        ],
+        [
+          914,
+          164
+        ],
+        [
+          923,
+          150
+        ],
+        [
+          919,
+          129
+        ],
+        [
+          934,
+          140
+        ],
+        [
+          948,
+          126
+        ],
+        [
+          971,
+          119
+        ],
+        [
+          987,
+          123
+        ],
+        [
+          1007,
+          130
+        ],
+        [
+          1017,
+          149
+        ],
+        [
+          1020,
+          162
+        ],
+        [
+          1035,
+          171
+        ],
+        [
+          1033,
+          180
+        ],
+        [
+          1040,
+          186
+        ],
+        [
+          1034,
+          194
+        ],
+        [
+          1037,
+          201
+        ],
+        [
+          1025,
+          210
+        ],
+        [
+          1005,
+          219
+        ],
+        [
+          1003,
+          240
+        ],
+        [
+          1022,
+          251
+        ],
+        [
+          1042,
+          270
+        ],
+        [
+          1057,
+          294
+        ],
+        [
+          1067,
+          321
+        ],
+        [
+          1068,
+          375
+        ],
+        [
+          1068,
+          431
+        ],
+        [
+          1000,
+          431
+        ],
+        [
+          942,
+          462
+        ],
+        [
+          942,
+          644
+        ],
+        [
+          960,
+          665
+        ],
+        [
+          910,
+          670
+        ]
+      ],
+      "width": 170,
+      "height": 554,
+      "file": "duchess-portrait.png"
+    },
+    "imperial-seal": {
+      "box": [
+        1300,
+        35,
+        1518,
+        350
+      ],
+      "width": 218,
+      "height": 315,
+      "file": "imperial-seal.webp"
+    },
+    "house-seal": {
+      "box": [
+        686,
+        33,
+        762,
+        103
+      ],
+      "width": 76,
+      "height": 70,
+      "file": "house-seal.webp"
+    },
+    "bishop-scene": {
+      "box": [
+        540,
+        795,
+        876,
+        940
+      ],
+      "width": 336,
+      "height": 145,
+      "file": "bishop-scene.webp"
+    },
+    "avelis-scene": {
+      "box": [
+        927,
+        881,
+        1242,
+        943
+      ],
+      "width": 315,
+      "height": 62,
+      "file": "avelis-scene.webp"
+    }
+  }
+}
