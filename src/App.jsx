@@ -1,3 +1,4 @@
+import Guestbook from './Guestbook.jsx';
 import React, { useEffect, useRef, useState } from 'react';
 import { CaretLeft, CaretRight, Fingerprint, Globe, Heart, Martini, Planet } from '@phosphor-icons/react';
 import { people, routeFromHash } from './content.js';
@@ -44,14 +45,6 @@ function Dossier({ page }) {
     </article>
     <DossierNavigation page={page} />
   </>;
-}
-
-function Guestbook() {
-  return <><HouseHeader /><section className="utility-page">
-    <p className="eyebrow">The imperial archives</p><h1 tabIndex={-1}>The imperial<br />visitor registry</h1>
-    <p className="page-intro">A permanent record of those who survived first contact.</p>
-    <Panel title="Registry awaiting authorization"><p>The visitor registry is not yet open.</p><p>Guest messages and optional photographs will be published only after review. No personal information is being collected.</p></Panel>
-  </section><BottomNav page="guestbook" /></>;
 }
 
 function Secrets({ onReveal }) {

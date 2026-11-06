@@ -60,7 +60,7 @@ p, li, dd { overflow-wrap: break-word; }
 .bevel:focus-visible::before { inset: 4px; }
 .guestbook-cta { display: flex; align-items: center; justify-content: center; gap: 14px; min-height: 67px; color: var(--gold-bright); margin: 10px 5px 0; padding: 8px 13px; --cut: 22px; text-transform: uppercase; }
 .guestbook-cta > span { text-align: center; font: 500 clamp(17px, 4.9cqi, 25px)/1.1 var(--label); letter-spacing: .08em; }
-.guestbook-cta small { display: block; font-size: .8em; margin-bottom: 2px; }
+.guestbook-cta small { display: block; font-size: .8em; margin-top: 2px; text-transform: none; }
 .guestbook-cta > svg { flex-shrink: 0; }
 .guestbook-cta:hover { background: var(--gold-bright); }
 .bottom-nav { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 13px 0 8px; margin-top: 12px; border-top: 1px solid var(--line); }
@@ -172,3 +172,12 @@ p, li, dd { overflow-wrap: break-word; }
   .outgoing-screen { animation: archive-exit 360ms cubic-bezier(.45,0,.2,1) both; }
   .incoming-screen { animation: archive-enter 360ms cubic-bezier(.45,0,.2,1) both; }
 }
+
+.book label { display: grid; gap: 5px; margin: 12px 0; color: var(--gold-bright); font: 500 16px var(--label); }
+.book input, .book textarea { width: 100%; max-width: 100%; min-height: 44px; padding: 8px; background: var(--ink); border: 1px solid var(--bronze); color: inherit; font: 16px Arial,sans-serif; }
+.book fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }
+.book .book-note, .book time { display: block; color: var(--muted); font-size: 13px; line-height: 1.4; margin: 12px 0; }
+.book-status { margin: 12px 0; color: var(--gold-bright); }
+.book-entry { padding: 12px 0; overflow-wrap: anywhere; }
+.book-entry + .book-entry { border-top: 1px solid var(--line); }
+.book-entry img { display: block; max-width: 100%; height: auto; margin-top: 8px; }

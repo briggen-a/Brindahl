@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { BookOpen, CaretLeft, CaretRight, Cube, Planet, StarFour, UsersThree, X } from '@phosphor-icons/react';
-import { artwork } from './content.js';
+import { artwork, guestbookSubtitle } from './content.js';
 
 export const navigation = [
   { route: 'home', label: 'Brindahl', Icon: Planet },
@@ -39,7 +39,7 @@ export function Panel({ title, children, className = '' }) {
 export function GuestbookLink() {
   return <a className="guestbook-cta bevel" href="#/guestbook">
     <BookOpen size={38} weight="thin" aria-hidden="true" />
-    <span><small>Sign the</small>Imperial guestbook</span>
+    <span>Imperial guestbook<small>{guestbookSubtitle}</small></span>
     <CaretRight size={24} weight="light" aria-hidden="true" />
   </a>;
 }

@@ -34,3 +34,5 @@ export function routeFromHash(hash) {
   const name = hash.replace(/^#\/?/, '');
   return routes.includes(name) ? name : 'home';
 }
+
+export const guestbookSubtitle = 'Register your Presence';
