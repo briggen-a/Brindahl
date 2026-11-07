@@ -10,7 +10,8 @@ async function read(id) {
 }
 
 export default guestbookHandler({
-  ready: () => Boolean(process.env.BLOB_READ_WRITE_TOKEN || (process.env.BLOB_STORE_ID && process.env.VERCEL_OIDC_TOKEN)),
+  // OIDC is available to Vercel Functions through request context; the Blob SDK resolves it.
+  ready: () => Boolean(process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID),
   read,
   async list(limit) {
     let cursor;
