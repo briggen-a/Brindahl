@@ -4,3 +4,6 @@ dist/
 !.env.example
 .vercel/
 .DS_Store
+
+.env*
+party.cfg

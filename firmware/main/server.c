@@ -1,6 +1,9 @@
 #include "book.h"
 #include "esp_http_server.h"
 #include <ctype.h>
+#include "mbedtls/sha256.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -48,13 +51,28 @@ static esp_err_t sign_entry(httpd_req_t *req) {
     return reply(req, status);
 }
 
-static esp_err_t delete_entry(httpd_req_t *req) {
-    char key[65];
-    if (httpd_req_get_hdr_value_str(req, "X-Host-Key", key, sizeof(key)) != ESP_OK ||
-        strlen(key) != 64) return reply(req, 403);
+static bool authorized(httpd_req_t *req) {
+    char key[65] = "";
+    if (httpd_req_get_hdr_value_str(req, "X-Host-Key", key, sizeof(key)) != ESP_OK) return false;
+    unsigned char given[32], expected[32];
+    if (mbedtls_sha256((const unsigned char *)key, strlen(key), given, 0) ||
+        mbedtls_sha256((const unsigned char *)host_key, strlen(host_key), expected, 0)) return false;
     unsigned int difference = 0;
-    for (int i=0; i<64; ++i) difference |= key[i] ^ host_key[i];
-    if (difference) return reply(req, 403);
+    for (int i = 0; i < 32; ++i) difference |= given[i] ^ expected[i];
+    if (difference) vTaskDelay(pdMS_TO_TICKS(350));
+    return difference == 0;
+}
+
+static esp_err_t host_or_sign(httpd_req_t *req) {
+    char query[64], action[16];
+    if (httpd_req_get_url_query_str(req, query, sizeof(query)) == ESP_OK &&
+        httpd_query_key_value(query, "action", action, sizeof(action)) == ESP_OK &&
+        !strcmp(action, "host")) return reply(req, authorized(req) ? 200 : 403);
+    return sign_entry(req);
+}
+
+static esp_err_t delete_entry(httpd_req_t *req) {
+    if (!authorized(req)) return reply(req, 403);
     return reply(req, book_delete(REGISTRY, req->uri + strlen("/api/entries/")));
 }
 
@@ -113,7 +131,7 @@ static esp_err_t serve_site(httpd_req_t *req) {
 }
 
 httpd_handle_t start_server(const char *key) {
-    memcpy(host_key, key, sizeof(host_key));
+    snprintf(host_key, sizeof(host_key), "%s", key);
     httpd_handle_t server = NULL;
     httpd_config_t config = HTTPD_DEFAULT_CONFIG();
     config.uri_match_fn = httpd_uri_match_wildcard;
@@ -122,7 +140,7 @@ httpd_handle_t start_server(const char *key) {
     if (httpd_start(&server, &config) != ESP_OK) return NULL;
     const httpd_uri_t routes[] = {
         {.uri="/api/entries", .method=HTTP_GET, .handler=list_entries},
-        {.uri="/api/entries", .method=HTTP_POST, .handler=sign_entry},
+        {.uri="/api/entries", .method=HTTP_POST, .handler=host_or_sign},
         {.uri="/api/entries/*", .method=HTTP_DELETE, .handler=delete_entry},
         {.uri="/api/photos/*", .method=HTTP_GET, .handler=serve_photo},
         {.uri="/*", .method=HTTP_GET, .handler=serve_site},

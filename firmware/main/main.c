@@ -33,9 +33,9 @@ static void drive_event(const msc_host_event_t *event, void *arg) {
 static bool read_keys(char *password, char *key) {
     FILE *file = fopen("/usb/party.cfg", "r");
     if (!file) return false;
-    int fields = fscanf(file, "wifi=%32[0-9a-f]\nhost=%64[0-9a-f]", password, key);
+    int fields = fscanf(file, "wifi=%32[0-9a-f]\nhost=%64[^\r\n]", password, key);
     fclose(file);
-    return fields == 2 && strlen(password) == 16 && strlen(key) == 64;
+    return fields == 2 && strlen(password) == 16 && strlen(key) >= 12 && strlen(key) <= 64;
 }
 
 void app_main(void) {

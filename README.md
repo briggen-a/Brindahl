@@ -26,4 +26,4 @@ The QR reference is decorative. Production QR encoding and phone scan testing be
 
 Review on a feature-branch Vercel preview. Keep `main` and the existing production site unchanged until approved. The repo retains JSX/CSS; no stack migration.
 
-The mobile guestbook preview supports signatures, timestamps, photos and deletion. See the [ESP32-S3 party host setup](docs/party-host.md) for the shared USB edition.
+The guestbook supports shared signatures, timestamps, photos and password-protected host deletion. Web hosting requires a private Vercel Blob store and HOST_PASSWORD. See the [ESP32-S3 party host setup](docs/party-host.md) for the shared USB edition.

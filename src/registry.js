@@ -1,5 +1,3 @@
-// The USB build uses the shared ESP API. Hosted design previews are device-local.
-export const preview = import.meta.env.VITE_REGISTRY_TARGET !== 'esp';
 const photoLimit = 80 * 1024;
 export async function preparePhoto(file) {
   if (!file?.size) return '';
@@ -29,30 +27,27 @@ export async function preparePhoto(file) {
 async function request(path, options) {
   let response;
   try { response = await fetch('/api/entries' + path, {cache:'no-store',...options}); }
-  catch { throw Error('Connection lost. Rejoin the Brindahl Wi-Fi and retry.'); }
-  if (!response.ok) throw Error(({403:'Incorrect host key.',429:'Please wait a few seconds and try again.',507:'The guestbook drive is full.'})[response.status] || 'The registry could not complete that request. Please retry.');
+  catch { throw Error('Connection lost. Check your network and retry.'); }
+  if (!response.ok) throw Error(({403:'Incorrect host password.',503:'The shared guestbook is awaiting host setup or is temporarily unavailable.',429:'Please wait a few seconds and try again.',507:'The guestbook drive is full.'})[response.status] || 'The registry could not complete that request. Please retry.');
   return response;
 }
 
-function localStore(mode, operation) {
-  return new Promise((resolve,reject) => {
-    const open = indexedDB.open('brindahl-preview-guestbook',1);
-    open.onupgradeneeded = () => open.result.createObjectStore('entries',{keyPath:'id'});
-    open.onerror = () => reject(Error('Browser storage is unavailable.'));
-    open.onsuccess = () => {
-      const db = open.result, tx = db.transaction('entries',mode);
-      const req = operation(tx.objectStore('entries'));
-      tx.oncomplete = () => { db.close(); resolve(req.result); };
-      tx.onabort = () => { db.close(); reject(Error('Browser storage could not save this change.')); };
-    };
-  });
-}
-export const registry = preview ? {
-  async list(limit) { return (await localStore('readonly',s=>s.getAll())).sort((a,b)=>b.created-a.created).slice(0,limit); },
-  sign(entry) { return localStore('readwrite',s=>s.put({...entry,photo:entry.photo ? 'data:image/jpeg;base64,' + entry.photo : ''})); },
-  remove(id) { return localStore('readwrite',s=>s.delete(id)); },
-} : {
-  async list(limit) { return (await request('?limit='+limit)).json(); },
-  sign(entry) { return request('',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(entry)}); },
-  remove(id,key) { return request('/'+id,{method:'DELETE',headers:{'X-Host-Key':key}}); },
+const onEsp = import.meta.env.VITE_REGISTRY_TARGET === 'esp';
+export const registry = {
+  async list(limit) {
+    const response = await request('?limit=' + limit);
+    if (!response.headers.get('Content-Type')?.includes('application/json')) {
+      throw Error('The guestbook service is unavailable. Please try again later.');
+    }
+    return response.json();
+  },
+  sign(entry) {
+    return request('', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry) });
+  },
+  unlock(key) {
+    return request('?action=host', { method: 'POST', headers: { 'X-Host-Key': key } });
+  },
+  remove(id, key) {
+    return request(onEsp ? '/' + id : '?id=' + id, { method: 'DELETE', headers: { 'X-Host-Key': key } });
+  },
 };

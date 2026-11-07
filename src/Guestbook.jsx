@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BottomNav, HouseHeader, Panel } from './components.jsx';
-import { registry, preview, preparePhoto } from './registry.js';
+import { registry, preparePhoto } from './registry.js';
 
 import { guestbookSubtitle } from './content.js';
 
@@ -9,6 +9,8 @@ export default function Guestbook() {
   const [notice, setNotice] = useState('');
   const [busy, setBusy] = useState(false);
   const [manage, setManage] = useState(false);
+  const [unlocked, setUnlocked] = useState(false);
+  const [available, setAvailable] = useState(false);
   const [key, setKey] = useState('');
   const [confirmId, setConfirmId] = useState('');
   const [limit, setLimit] = useState(12);
@@ -17,8 +19,8 @@ export default function Guestbook() {
   const [refresh, setRefresh] = useState(0);
   useEffect(() => {
     let active = true;
-    const load = () => registry.list(limit).then(rows => { if (active) setEntries(rows); })
-      .catch(() => { if (active) setNotice('Could not read the registry. Reconnect and refresh.'); });
+    const load = () => registry.list(limit).then(rows => { if (active) { setEntries(rows); setAvailable(true); } })
+      .catch(error => { if (active) { setAvailable(false); setNotice(error.message); } });
     load();
     const timer = setInterval(load, 15000);
     return () => { active = false; clearInterval(timer); };
@@ -48,6 +50,19 @@ export default function Guestbook() {
     finally { locked.current = false; setBusy(false); }
   }
 
+  async function unlock(event) {
+    event.preventDefault();
+    if (locked.current) return;
+    locked.current = true;
+    setBusy(true);
+    try {
+      await registry.unlock(key);
+      setUnlocked(true);
+      setNotice('Host controls unlocked.');
+    } catch (error) { setNotice(error.message); }
+    finally { locked.current = false; setBusy(false); }
+  }
+
   async function remove(id) {
     if (locked.current) return;
     locked.current = true;
@@ -65,9 +80,8 @@ export default function Guestbook() {
   return <><HouseHeader /><section className="utility-page book">
     <p className="eyebrow">The imperial archives</p><h1 tabIndex={-1}>The imperial<br />visitor registry</h1>
     <p className="page-intro">{guestbookSubtitle}</p>
-    {preview && <p className="book-note">Phone preview · signatures are saved in this browser. At the party, everyone shares the book on the Brindahl Wi-Fi.</p>}
     <Panel title="Sign the book"><form onSubmit={sign} onChange={() => { attempt.current = null; }}>
-      <fieldset disabled={busy}>
+      <fieldset disabled={busy || !available}>
         <label>Your name or signature<input name="name" required maxLength={64} autoComplete="nickname" /></label>
         <label>Message (optional)<textarea name="message" rows={3} maxLength={400} /></label>
         <label>Photo (optional)<input name="photo" type="file" accept="image/*" /></label>
@@ -77,17 +91,20 @@ export default function Guestbook() {
     </form></Panel>
     <p role="status" className="book-status">{notice}</p>
     <Panel title="Visitor entries">
-      {!entries.length && <p>Awaiting the first signature.</p>}
+      {available && !entries.length && <p>Awaiting the first signature.</p>}
       {entries.map(entry => <article className="book-entry" key={entry.id}>
         <strong>{entry.name}</strong><time dateTime={new Date(entry.created).toISOString()}>{new Date(entry.created).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})}</time>
         {entry.message && <p>{entry.message}</p>}
         {entry.photo && <img loading="lazy" src={entry.photo} alt={'Guestbook photo from ' + entry.name} />}
-        {manage && <button type="button" disabled={busy} className="text-button" onClick={() => confirmId === entry.id ? remove(entry.id) : setConfirmId(entry.id)}>{confirmId === entry.id ? 'Confirm deletion' : 'Delete entry'}</button>}
+        {unlocked && <button type="button" disabled={busy} className="text-button" onClick={() => confirmId === entry.id ? remove(entry.id) : setConfirmId(entry.id)}>{confirmId === entry.id ? 'Confirm deletion' : 'Delete entry'}</button>}
         {confirmId === entry.id && <button className="text-button" onClick={() => setConfirmId('')}>Cancel</button>}
       </article>)}
       {entries.length >= limit && limit < 200 && <button className="text-button" onClick={() => setLimit(n => Math.min(200,n+12))}>Show earlier signatures</button>}
     </Panel>
-    <button className="text-button" onClick={() => {setManage(!manage);setKey('');setConfirmId('');}}>{manage ? 'Close host controls' : 'Host controls'}</button>
-    {manage && !preview && <label>Host key<input type="password" value={key} autoComplete="off" onChange={e=>setKey(e.target.value)} /></label>}
+    <button className="text-button" disabled={busy} onClick={() => {setManage(!manage);setUnlocked(false);setKey('');setConfirmId('');}}>{manage ? 'Close host controls' : 'Host controls'}</button>
+    {manage && !unlocked && <form onSubmit={unlock}>
+      <label>Host password<input type="password" required maxLength={64} value={key} autoComplete="current-password" onChange={e => setKey(e.target.value)} /></label>
+      <button className="text-button" disabled={busy || !available}>Unlock host controls</button>
+    </form>}
   </section><BottomNav page="guestbook" /></>;
 }
