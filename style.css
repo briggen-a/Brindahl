@@ -165,6 +165,12 @@ p, li, dd { overflow-wrap: break-word; }
 }
 
 @media (max-width: 599px) {
+  .archive-shell--duke .dossier-back {
+    position: absolute;
+    top: max(24px, env(safe-area-inset-top));
+    right: max(14px, env(safe-area-inset-right));
+    transform: none;
+  }
   .dossier--duke { grid-template-columns: 34% minmax(0, 1fr); grid-template-rows: max-content max-content auto; }
   .dossier--duke .dossier-portrait { grid-row: 1 / 4; }
   .dossier--duke .biography,
