@@ -45,7 +45,7 @@ export function GuestbookLink() {
 }
 
 export function DossierLink({ page }) {
-  return <a className="dossier-other" href={page === 'duke' ? '#/duchess' : '#/duke'}>{page === 'duke' ? 'Meet the Duchess' : 'Meet the Duke'} <CaretRight size={17} aria-hidden="true" /></a>;
+  return <a className={page === 'duke' ? 'dossier-other bevel' : 'dossier-other'} href={page === 'duke' ? '#/duchess' : '#/duke'}>{page === 'duke' ? 'Meet the Duchess' : 'Meet the Duke'} <CaretRight size={17} aria-hidden="true" /></a>;
 }
 
 export function DossierNavigation({ page }) {
