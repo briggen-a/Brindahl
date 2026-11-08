@@ -165,20 +165,29 @@ p, li, dd { overflow-wrap: break-word; }
 }
 
 @media (max-width: 599px) {
-  .archive-shell--duke .dossier-back {
-    position: absolute;
-    top: max(24px, env(safe-area-inset-top));
-    right: max(14px, env(safe-area-inset-right));
-    transform: none;
+  .dossier--duke {
+    --duke-portrait-column: 38%;
+    grid-template-columns: var(--duke-portrait-column) minmax(0, 1fr);
+    grid-template-rows: max-content max-content auto;
   }
-  .dossier--duke { grid-template-columns: 34% minmax(0, 1fr); grid-template-rows: max-content max-content auto; }
-  .dossier--duke .dossier-portrait { grid-row: 1 / 4; }
+  .dossier--duke .dossier-portrait {
+    position: absolute;
+    grid-column: auto;
+    top: 17px;
+    left: -10px;
+    width: calc(var(--duke-portrait-column) + 8px);
+    z-index: -1;
+  }
+  .archive-shell--duke .dossier-back { width: 34px; }
+  .dossier--duke .dossier-summary,
+  .dossier--duke .biography,
+  .dossier--duke .person-extras { margin-right: 22px; }
   .dossier--duke .biography,
   .dossier--duke .person-extras {
     grid-column: 2;
     align-self: start;
     min-width: 0;
-    margin-inline: 2px 0;
+    margin-left: 2px;
   }
   .dossier--duke .person-extras { grid-row: 3; }
   .archive-shell { padding-left: max(14px, env(safe-area-inset-left)); padding-right: max(14px, env(safe-area-inset-right)); }
