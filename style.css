@@ -85,6 +85,9 @@ p, li, dd { overflow-wrap: break-word; }
   pointer-events: none;
 }
 .dossier-summary { grid-column: 2; grid-row: 1; z-index: 1; min-width: 0; padding: 35px 0 17px 2px; }
+.dossier--duke .dossier-portrait {
+  mask-image: linear-gradient(to bottom, #000 66.6667%, transparent);
+}
 .dossier--duchess .dossier-portrait {
   mask-image: linear-gradient(to bottom, #000 70%, transparent);
 }
