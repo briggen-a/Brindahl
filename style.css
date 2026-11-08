@@ -254,4 +254,20 @@ p, li, dd { overflow-wrap: break-word; }
 }
 .dossier--duke .biography,
 .dossier--duke .person-extras { grid-column: 1 / -1; margin-left: 0; }
-.dossier-summary .dossier-other { padding-inline: 4px; }
+.dossier--duke .dossier-summary .dossier-other {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  min-height: 54px;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid var(--gold-bright);
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+.dossier--duke .dossier-summary .dossier-other:hover { background: var(--gold-bright); }
+.dossier--duke .dossier-summary .dossier-other svg { flex-shrink: 0; }
+.dossier-landscape { filter: url('/artwork/landscape-sharpen.svg#sharpen'); }
