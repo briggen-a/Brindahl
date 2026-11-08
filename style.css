@@ -75,27 +75,20 @@ p, li, dd { overflow-wrap: break-word; }
 .house-header p { font: 500 14px/1.3 var(--label); color: var(--gold-bright); text-transform: uppercase; letter-spacing: .25em; }
 .house-header p span { font-size: 12px; }
 .dossier { position: relative; display: grid; grid-template-columns: 40% 60%; padding-top: 3px; isolation: isolate; }
-.dossier-portrait {
-  grid-column: 1;
-  grid-row: 1;
-  align-self: start;
-  width: calc(100% - 10px);
-  margin-top: 14px;
-  pointer-events: none;
-}
 .dossier-summary { grid-column: 2; grid-row: 1; z-index: 1; min-width: 0; padding: 35px 0 17px 2px; }
-.archive-shell--duke { --duke-portrait-column: 40cqi; }
-.archive-shell--duke .dossier-layout {
+.dossier-layout {
+  --portrait-column: 40cqi;
   display: grid;
-  grid-template-columns: var(--duke-portrait-column) minmax(0, 1fr);
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: var(--portrait-column) minmax(0, 1fr);
+  grid-template-rows: repeat(4, auto);
 }
+.archive-shell--duchess .dossier-layout { grid-template-rows: repeat(5, auto); }
 .dossier-portrait-layer {
   grid-area: 1 / 1;
   position: relative;
   z-index: 0;
 }
-.duke-floating-portrait {
+.dossier-portrait {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -168,7 +161,6 @@ p, li, dd { overflow-wrap: break-word; }
   .archive-shell--duchess { padding-inline: max(44px, calc((100% - 640px) / 2)); }
   .dossier { grid-template-rows: max-content max-content auto; }
   .dossier--duchess .dossier-summary { padding-top: 135px; }
-  .dossier .dossier-portrait { grid-row: 1 / 4; }
   .dossier .biography,
   .dossier .person-extras {
     grid-column: 2;
@@ -188,9 +180,9 @@ p, li, dd { overflow-wrap: break-word; }
 }
 
 @media (max-width: 599px) {
-  .archive-shell--duke { --duke-portrait-column: 38cqi; }
+  .archive-shell--duke .dossier-layout { --portrait-column: 38cqi; }
   .dossier--duke {
-    grid-template-columns: var(--duke-portrait-column) minmax(0, 1fr);
+    grid-template-columns: var(--portrait-column) minmax(0, 1fr);
     grid-template-rows: max-content max-content auto;
   }
   .archive-shell--duke .dossier-back { width: 34px; }
@@ -248,14 +240,17 @@ p, li, dd { overflow-wrap: break-word; }
 .book-entry + .book-entry { border-top: 1px solid var(--line); }
 .book-entry img { display: block; max-width: 100%; height: auto; margin-top: 8px; }
 
-.dossier.dossier--duke {
-  grid-area: 1 / 1 / 5 / -1;
+.dossier-layout .dossier {
+  grid-area: 1 / 1 / -1 / -1;
   grid-template-rows: subgrid;
   pointer-events: none;
 }
-.dossier--duke > * { pointer-events: auto; }
+.dossier-layout .dossier > * { pointer-events: auto; }
 .dossier--duke .dossier-summary {
-  min-block-size: calc(var(--duke-portrait-column) * 220 / 126);
+  min-block-size: calc(var(--portrait-column) * 220 / 126);
+}
+.dossier--duchess .dossier-summary {
+  min-block-size: calc(var(--portrait-column) * 840 / 473);
 }
 .dossier--duke .biography,
 .dossier--duke .person-extras { grid-column: 1 / -1; margin-left: 0; }

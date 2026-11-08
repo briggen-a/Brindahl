@@ -31,11 +31,10 @@ function Dossier({ page }) {
       Back
     </a>
     <div className="dossier-layout">
-      {page === 'duke' && <div className="dossier-portrait-layer">
-        <Artwork asset="dukeWaistPortrait" className="dossier-portrait duke-floating-portrait" priority />
-      </div>}
+      <div className="dossier-portrait-layer">
+        <Artwork asset={page === 'duke' ? 'dukeWaistPortrait' : 'duchessPortrait'} className={`dossier-portrait ${page}-floating-portrait`} priority />
+      </div>
       <article className={`dossier dossier--${page}`} aria-labelledby="person-name">
-        {page === 'duchess' && <Artwork asset="duchessPortrait" className="dossier-portrait" priority />}
         <div className="dossier-summary">
           <div className="dossier-title bevel"><h1 id="person-name" tabIndex={-1}><span>{person.title}</span>{person.name}</h1><p className="classification">{person.classification}</p></div>
           <dl className="person-facts"><div><dt>Origin</dt><dd>{person.origin}<span>({person.originDetail})</span></dd></div><div><dt>Role</dt><dd>{person.role}</dd></div></dl>
