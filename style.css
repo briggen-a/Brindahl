@@ -154,6 +154,7 @@ p, li, dd { overflow-wrap: break-word; }
   .archive-shell--duke,
   .archive-shell--duchess { padding-inline: max(44px, calc((100% - 640px) / 2)); }
   .dossier { grid-template-rows: max-content max-content auto; }
+  .dossier--duchess .dossier-summary { padding-top: 135px; }
   .dossier .dossier-portrait { grid-row: 1 / 4; }
   .dossier .biography,
   .dossier .person-extras {
