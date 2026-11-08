@@ -76,6 +76,7 @@ p, li, dd { overflow-wrap: break-word; }
 .house-header p { font: 500 14px/1.3 var(--label); color: var(--gold-bright); text-transform: uppercase; letter-spacing: .25em; }
 .house-header p span { font-size: 12px; }
 .dossier { position: relative; display: grid; grid-template-columns: 40% 60%; padding-top: 7px; isolation: isolate; }
+.dossier--duke { padding-top: 3px; }
 .dossier-portrait {
   grid-column: 1;
   grid-row: 1;
@@ -149,6 +150,17 @@ p, li, dd { overflow-wrap: break-word; }
 .dialog-close { position: absolute; top: 5px; right: 5px; }
 @media (min-width: 600px) {
   .archive-shell { padding-inline: max(21px, calc((100% - 510px) / 2)); }
+  .archive-shell--duke { padding-inline: max(44px, calc((100% - 640px) / 2)); }
+  .dossier--duke { grid-template-rows: max-content max-content auto; }
+  .dossier--duke .dossier-portrait { grid-row: 1 / 4; }
+  .dossier--duke .biography,
+  .dossier--duke .person-extras {
+    grid-column: 2;
+    align-self: start;
+    min-width: 0;
+    margin-inline: 2px 0;
+  }
+  .dossier--duke .person-extras { grid-row: 3; }
   .panel p { font-size: 16px; }
   .exploits { font-size: 15px; }
   .person-facts { font-size: 14px; }
