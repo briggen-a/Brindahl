@@ -84,10 +84,15 @@ p, li, dd { overflow-wrap: break-word; }
   pointer-events: none;
 }
 .dossier-summary { grid-column: 2; grid-row: 1; z-index: 1; min-width: 0; padding: 35px 0 17px 2px; }
-.dossier--duke .dossier-portrait {
-  position: relative;
+.archive-shell--duke { --duke-portrait-column: 40%; }
+.dossier-portrait-layer { position: relative; z-index: 0; }
+.duke-floating-portrait {
+  position: absolute;
+  top: 17px;
   left: -10px;
-  width: calc(100% + 8px);
+  width: calc(var(--duke-portrait-column) + 8px);
+  margin: 0;
+  pointer-events: auto;
   aspect-ratio: 154 / 220;
   object-fit: cover;
   object-position: top;
@@ -175,14 +180,10 @@ p, li, dd { overflow-wrap: break-word; }
 }
 
 @media (max-width: 599px) {
+  .archive-shell--duke { --duke-portrait-column: 38%; }
   .dossier--duke {
-    --duke-portrait-column: 38%;
     grid-template-columns: var(--duke-portrait-column) minmax(0, 1fr);
     grid-template-rows: max-content max-content auto;
-  }
-  .dossier--duke .dossier-portrait {
-    grid-row: 1 / 4;
-    z-index: -1;
   }
   .archive-shell--duke .dossier-back { width: 34px; }
   .dossier--duke .dossier-summary,
@@ -239,7 +240,11 @@ p, li, dd { overflow-wrap: break-word; }
 .book-entry + .book-entry { border-top: 1px solid var(--line); }
 .book-entry img { display: block; max-width: 100%; height: auto; margin-top: 8px; }
 
-.dossier--duke .dossier-portrait { grid-row: 1; }
+.dossier--duke { pointer-events: none; }
+.dossier--duke > * { pointer-events: auto; }
+.dossier--duke .dossier-summary {
+  min-block-size: calc(14px + (var(--duke-portrait-column) + 8px) * 220 / 154);
+}
 .dossier--duke .biography,
 .dossier--duke .person-extras { grid-column: 1 / -1; margin-left: 0; }
 .dossier-summary .dossier-other { padding-inline: 4px; }
