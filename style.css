@@ -188,11 +188,11 @@ p, li, dd { overflow-wrap: break-word; }
     grid-template-columns: var(--portrait-column) minmax(0, 1fr);
     grid-template-rows: max-content max-content auto;
   }
-  .archive-shell--duke .dossier-back { width: 34px; }
+  .archive-shell--duke .dossier-back { width: 42px; }
   .dossier--duke .dossier-summary,
 
   .dossier--duke .biography,
-  .dossier--duke .person-extras { margin-right: 22px; }
+  .dossier--duke .person-extras { margin-right: 30px; }
 
   .dossier--duke .person-extras {
     grid-column: 2;
