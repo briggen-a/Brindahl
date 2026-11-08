@@ -86,9 +86,14 @@ p, li, dd { overflow-wrap: break-word; }
 }
 .dossier-summary { grid-column: 2; grid-row: 1; z-index: 1; min-width: 0; padding: 35px 0 17px 2px; }
 .dossier--duke .dossier-portrait {
-  mask-image: linear-gradient(to bottom, #000 66.6667%, transparent);
+  position: relative;
+  left: -10px;
+  width: calc(100% + 8px);
+  aspect-ratio: 154 / 220;
+  object-fit: cover;
+  object-position: top;
 }
-.dossier--duchess .dossier-portrait {
+.dossier-portrait {
   mask-image: linear-gradient(to bottom, #000 70%, transparent);
 }
 .dossier-title { padding: 14px 10px 12px; }
@@ -171,10 +176,7 @@ p, li, dd { overflow-wrap: break-word; }
     grid-template-rows: max-content max-content auto;
   }
   .dossier--duke .dossier-portrait {
-    position: relative;
     grid-row: 1 / 4;
-    left: -10px;
-    width: calc(100% + 8px);
     z-index: -1;
   }
   .archive-shell--duke .dossier-back { width: 34px; }
