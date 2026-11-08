@@ -84,7 +84,7 @@ p, li, dd { overflow-wrap: break-word; }
   pointer-events: none;
 }
 .dossier-summary { grid-column: 2; grid-row: 1; z-index: 1; min-width: 0; padding: 35px 0 17px 2px; }
-.archive-shell--duke { --duke-portrait-column: 40%; }
+.archive-shell--duke { --duke-portrait-column: 40cqi; }
 .dossier-portrait-layer { position: relative; z-index: 0; }
 .duke-floating-portrait {
   position: absolute;
@@ -180,7 +180,7 @@ p, li, dd { overflow-wrap: break-word; }
 }
 
 @media (max-width: 599px) {
-  .archive-shell--duke { --duke-portrait-column: 38%; }
+  .archive-shell--duke { --duke-portrait-column: 38cqi; }
   .dossier--duke {
     grid-template-columns: var(--duke-portrait-column) minmax(0, 1fr);
     grid-template-rows: max-content max-content auto;
