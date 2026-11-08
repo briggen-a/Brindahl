@@ -21,7 +21,7 @@ export const people = {
 // Homepage hero uses the user-provided Photoshop composite as a single image.
 export const artwork = {
   hero: { src: '/artwork/brindahl-homepage.jpg', width: 1131, height: 1391, alt: 'The Duke and Duchess overlooking Brindahl’s futuristic city and waterfalls, with their name plaques and the imperial seal.' },
-  dukePortrait: { src: '/artwork/duke-portrait.png', width: 175, height: 560, alt: 'Duke Mahgirb in black and gold imperial dress.' },
+  dukePortrait: { src: '/artwork/duke-dossier-custom.png', width: 1024, height: 1536, alt: 'Duke Mahgirb in his black imperial coat and reflective visor.' },
   duchessPortrait: { src: '/artwork/duchess-portrait.png', width: 170, height: 554, alt: 'Duchess Lhadnik in black and gold imperial dress.' },
   seal: { src: '/artwork/house-seal.webp', width: 76, height: 70, alt: 'The ornate intertwined B and K imperial seal.' },
   bishop: { src: '/artwork/bishop-scene.webp', width: 336, height: 145, alt: 'The Duke and Duchess outside the illuminated dance hall on Bishop.' },

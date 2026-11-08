@@ -32,7 +32,7 @@ function Dossier({ page }) {
       Back
     </a>
     <article className={`dossier dossier--${page}`} aria-labelledby="person-name">
-      <Artwork asset={`${page}Portrait`} className="dossier-portrait" priority />
+      <Artwork asset={`${page}Portrait`} className={`dossier-portrait dossier-portrait--${page}`} priority />
       <div className="dossier-summary">
         <div className="dossier-title bevel"><h1 id="person-name" tabIndex={-1}><span>{person.title}</span>{person.name}</h1><p className="classification">{person.classification}</p></div>
         <dl className="person-facts"><div><dt>Origin</dt><dd>{person.origin}<span>({person.originDetail})</span></dd></div><div><dt>Role</dt><dd>{person.role}</dd></div></dl>
