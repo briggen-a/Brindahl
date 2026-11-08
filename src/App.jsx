@@ -30,22 +30,24 @@ function Dossier({ page }) {
       {page === 'duke' ? <CaretRight aria-hidden="true" /> : <CaretLeft aria-hidden="true" />}
       Back
     </a>
-    {page === 'duke' && <div className="dossier-portrait-layer">
-      <Artwork asset="dukePortrait" className="dossier-portrait duke-floating-portrait" priority />
-    </div>}
-    <article className={`dossier dossier--${page}`} aria-labelledby="person-name">
-      {page === 'duchess' && <Artwork asset="duchessPortrait" className="dossier-portrait" priority />}
-      <div className="dossier-summary">
-        <div className="dossier-title bevel"><h1 id="person-name" tabIndex={-1}><span>{person.title}</span>{person.name}</h1><p className="classification">{person.classification}</p></div>
-        <dl className="person-facts"><div><dt>Origin</dt><dd>{person.origin}<span>({person.originDetail})</span></dd></div><div><dt>Role</dt><dd>{person.role}</dd></div></dl>
-        {page === 'duke' && <DossierLink page={page} />}
-      </div>
-      <Panel title="Biography" className="biography"><p>{person.biography}</p></Panel>
-      {page === 'duke' ? <Panel title="Notable exploits" className="person-extras"><ul className="exploits">{person.exploits.map(exploit => <li key={exploit}>{exploit}</li>)}</ul></Panel> :
-        <Panel title="At a glance" className="person-extras"><ul className="at-a-glance">{[[Globe, 'Dance enthusiast'], [Planet, 'Galactic traveler'], [Martini, 'Beverage connoisseur'], [Heart, 'Keeps the Duke in line']].map(([Icon, label]) => <li key={label}><Icon weight="thin" size={30} aria-hidden="true" /><span>{label}</span></li>)}</ul></Panel>}
-      {person.quote && <blockquote>“{person.quote}”<cite>— Duchess Lhadnik</cite></blockquote>}
-      <Artwork asset={page === 'duke' ? 'bishop' : 'avelis'} className="dossier-landscape" />
-    </article>
+    <div className="dossier-layout">
+      {page === 'duke' && <div className="dossier-portrait-layer">
+        <Artwork asset="dukeWaistPortrait" className="dossier-portrait duke-floating-portrait" priority />
+      </div>}
+      <article className={`dossier dossier--${page}`} aria-labelledby="person-name">
+        {page === 'duchess' && <Artwork asset="duchessPortrait" className="dossier-portrait" priority />}
+        <div className="dossier-summary">
+          <div className="dossier-title bevel"><h1 id="person-name" tabIndex={-1}><span>{person.title}</span>{person.name}</h1><p className="classification">{person.classification}</p></div>
+          <dl className="person-facts"><div><dt>Origin</dt><dd>{person.origin}<span>({person.originDetail})</span></dd></div><div><dt>Role</dt><dd>{person.role}</dd></div></dl>
+          {page === 'duke' && <DossierLink page={page} />}
+        </div>
+        <Panel title="Biography" className="biography"><p>{person.biography}</p></Panel>
+        {page === 'duke' ? <Panel title="Notable exploits" className="person-extras"><ul className="exploits">{person.exploits.map(exploit => <li key={exploit}>{exploit}</li>)}</ul></Panel> :
+          <Panel title="At a glance" className="person-extras"><ul className="at-a-glance">{[[Globe, 'Dance enthusiast'], [Planet, 'Galactic traveler'], [Martini, 'Beverage connoisseur'], [Heart, 'Keeps the Duke in line']].map(([Icon, label]) => <li key={label}><Icon weight="thin" size={30} aria-hidden="true" /><span>{label}</span></li>)}</ul></Panel>}
+        {person.quote && <blockquote>“{person.quote}”<cite>— Duchess Lhadnik</cite></blockquote>}
+        <Artwork asset={page === 'duke' ? 'bishop' : 'avelis'} className="dossier-landscape" />
+      </article>
+    </div>
     <DossierNavigation page={page} />
   </>;
 }
