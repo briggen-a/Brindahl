@@ -187,6 +187,7 @@ p, li, dd { overflow-wrap: break-word; }
   .archive-shell--duke .dossier-back { width: 34px; }
   .dossier--duke .dossier-summary,
 
+  .dossier--duke .biography,
   .dossier--duke .person-extras { margin-right: 22px; }
 
   .dossier--duke .person-extras {
