@@ -171,11 +171,10 @@ p, li, dd { overflow-wrap: break-word; }
     grid-template-rows: max-content max-content auto;
   }
   .dossier--duke .dossier-portrait {
-    position: absolute;
-    grid-column: auto;
-    top: 17px;
+    position: relative;
+    grid-row: 1 / 4;
     left: -10px;
-    width: calc(var(--duke-portrait-column) + 8px);
+    width: calc(100% + 8px);
     z-index: -1;
   }
   .archive-shell--duke .dossier-back { width: 34px; }
