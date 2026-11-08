@@ -186,9 +186,9 @@ p, li, dd { overflow-wrap: break-word; }
   }
   .archive-shell--duke .dossier-back { width: 34px; }
   .dossier--duke .dossier-summary,
-  .dossier--duke .biography,
+
   .dossier--duke .person-extras { margin-right: 22px; }
-  .dossier--duke .biography,
+
   .dossier--duke .person-extras {
     grid-column: 2;
     align-self: start;
@@ -237,3 +237,6 @@ p, li, dd { overflow-wrap: break-word; }
 .book-entry { padding: 12px 0; overflow-wrap: anywhere; }
 .book-entry + .book-entry { border-top: 1px solid var(--line); }
 .book-entry img { display: block; max-width: 100%; height: auto; margin-top: 8px; }
+
+.dossier--duke .dossier-portrait { grid-row: 1; }
+.dossier--duke .biography { grid-column: 1 / -1; margin-left: 0; }
