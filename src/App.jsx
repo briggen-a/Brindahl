@@ -38,7 +38,7 @@ function Dossier({ page }) {
         <div className="dossier-summary">
           <div className="dossier-title bevel"><h1 id="person-name" tabIndex={-1}><span>{person.title}</span>{person.name}</h1><p className="classification">{person.classification}</p></div>
           <dl className="person-facts"><div><dt>Origin</dt><dd>{person.origin}<span>({person.originDetail})</span></dd></div><div><dt>Role</dt><dd>{person.role}</dd></div></dl>
-          {page === 'duke' && <DossierLink page={page} />}
+          <DossierLink page={page} />
         </div>
         <Panel title="Biography" className="biography"><p>{person.biography}</p></Panel>
         {page === 'duke' ? <Panel title="Notable exploits" className="person-extras"><ul className="exploits">{person.exploits.map(exploit => <li key={exploit}>{exploit}</li>)}</ul></Panel> :
