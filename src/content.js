@@ -18,10 +18,9 @@ export const people = {
   },
 };
 
-// User-approved extractions of the exact master. See public/artwork/provenance.json.
-// Hero is intentionally one composition, not independently movable people/planet.
+// Homepage hero uses the user-provided Photoshop composite as a single image.
 export const artwork = {
-  hero: { src: '/artwork/brindahl-hero.webp', width: 492, height: 605, alt: 'Duke Mahgirb and Duchess Lhadnik stand side by side in full imperial dress before Brindahl, its waterfalls and cities. The B/K seal rests at their feet.' },
+  hero: { src: '/artwork/brindahl-homepage.jpg', width: 1131, height: 1391, alt: 'The Duke and Duchess overlooking Brindahl’s futuristic city and waterfalls, with their name plaques and the imperial seal.' },
   dukePortrait: { src: '/artwork/duke-portrait.png', width: 175, height: 560, alt: 'Duke Mahgirb in black and gold imperial dress.' },
   duchessPortrait: { src: '/artwork/duchess-portrait.png', width: 170, height: 554, alt: 'Duchess Lhadnik in black and gold imperial dress.' },
   seal: { src: '/artwork/house-seal.webp', width: 76, height: 70, alt: 'The ornate intertwined B and K imperial seal.' },
