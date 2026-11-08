@@ -180,6 +180,7 @@ p, li, dd { overflow-wrap: break-word; }
 }
 
 @media (max-width: 599px) {
+  .landing-header { padding-top: 0; }
   .archive-shell--duchess .dossier-portrait-layer { overflow: hidden; }
   .duchess-floating-portrait { top: -14%; }
   .archive-shell--duke .dossier-layout { --portrait-column: 38cqi; }
