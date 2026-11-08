@@ -22,7 +22,7 @@ export const people = {
 export const artwork = {
   hero: { src: '/artwork/brindahl-homepage.jpg', width: 1131, height: 1391, alt: 'The Duke and Duchess overlooking Brindahl’s futuristic city and waterfalls, with their name plaques and the imperial seal.' },
   dukePortrait: { src: '/artwork/duke-visor.png', width: 154, height: 420, alt: 'Duke Mahgirb in a black coat and metallic visor.' },
-  duchessPortrait: { src: '/artwork/duchess-headshot.png', width: 405, height: 720, alt: 'Duchess Lhadnik in a gray hood and gold headdress.' },
+  duchessPortrait: { src: '/artwork/duchess-gold.png', width: 473, height: 840, alt: 'Duchess Lhadnik wearing a gray hood and gold headdress.' },
   seal: { src: '/artwork/house-seal.webp', width: 76, height: 70, alt: 'The ornate intertwined B and K imperial seal.' },
   bishop: { src: '/artwork/bishop-scene.webp', width: 336, height: 145, alt: 'The Duke and Duchess outside the illuminated dance hall on Bishop.' },
   avelis: { src: '/artwork/avelis-scene.webp', width: 315, height: 62, alt: 'Avelis: distant mountains and a city beneath the night sky.' },
