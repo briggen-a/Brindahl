@@ -240,4 +240,6 @@ p, li, dd { overflow-wrap: break-word; }
 .book-entry img { display: block; max-width: 100%; height: auto; margin-top: 8px; }
 
 .dossier--duke .dossier-portrait { grid-row: 1; }
-.dossier--duke .biography { grid-column: 1 / -1; margin-left: 0; }
+.dossier--duke .biography,
+.dossier--duke .person-extras { grid-column: 1 / -1; margin-left: 0; }
+.dossier-summary .dossier-other { padding-inline: 4px; }

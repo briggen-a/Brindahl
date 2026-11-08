@@ -44,9 +44,13 @@ export function GuestbookLink() {
   </a>;
 }
 
+export function DossierLink({ page }) {
+  return <a className="dossier-other" href={page === 'duke' ? '#/duchess' : '#/duke'}>{page === 'duke' ? 'Meet the Duchess' : 'Meet the Duke'} <CaretRight size={17} aria-hidden="true" /></a>;
+}
+
 export function DossierNavigation({ page }) {
   return <nav className="dossier-navigation" aria-label="House dossiers">
-    <a className="dossier-other" href={page === 'duke' ? '#/duchess' : '#/duke'}>{page === 'duke' ? 'Meet the Duchess' : 'Meet the Duke'} <CaretRight size={17} aria-hidden="true" /></a>
+    {page === 'duchess' && <DossierLink page={page} />}
     <div className="dossier-dots">
       {[['home', 'Brindahl'], ['duke', 'Duke Mahgirb'], ['duchess', 'Duchess Lhadnik']].map(([route, label]) => <a key={route} href={`#/${route}`} aria-label={label} aria-current={page === route ? 'page' : undefined}><span /></a>)}
     </div>

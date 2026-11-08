@@ -2,7 +2,7 @@ import Guestbook from './Guestbook.jsx';
 import React, { useEffect, useRef, useState } from 'react';
 import { CaretLeft, CaretRight, Fingerprint, Globe, Heart, Martini, Planet } from '@phosphor-icons/react';
 import { people, routeFromHash } from './content.js';
-import { Artwork, BottomNav, DossierNavigation, GuestbookLink, HouseHeader, Modal, Panel } from './components.jsx';
+import { Artwork, BottomNav, DossierLink, DossierNavigation, GuestbookLink, HouseHeader, Modal, Panel } from './components.jsx';
 
 function Landing({ onPlanetTap }) {
   return <>
@@ -35,6 +35,7 @@ function Dossier({ page }) {
       <div className="dossier-summary">
         <div className="dossier-title bevel"><h1 id="person-name" tabIndex={-1}><span>{person.title}</span>{person.name}</h1><p className="classification">{person.classification}</p></div>
         <dl className="person-facts"><div><dt>Origin</dt><dd>{person.origin}<span>({person.originDetail})</span></dd></div><div><dt>Role</dt><dd>{person.role}</dd></div></dl>
+        {page === 'duke' && <DossierLink page={page} />}
       </div>
       <Panel title="Biography" className="biography"><p>{person.biography}</p></Panel>
       {page === 'duke' ? <Panel title="Notable exploits" className="person-extras"><ul className="exploits">{person.exploits.map(exploit => <li key={exploit}>{exploit}</li>)}</ul></Panel> :
