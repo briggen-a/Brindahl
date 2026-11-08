@@ -45,12 +45,12 @@ p, li, dd { overflow-wrap: break-word; }
 .tagline span { color: var(--gold-bright); }
 .landing-scene { position: relative; margin: 12px -5px 0; }
 .artwork { display: block; width: 100%; height: auto; }
-.hero-artwork { aspect-ratio: 492 / 605; }
+.hero-artwork { aspect-ratio: 1131 / 1391; }
 .art-link { position: absolute; display: block; padding: 0; border: 0; background: transparent; }
 .planet-target { inset: 0 0 auto; height: 18%; width: 100%; }
-.standing-character { top: 18%; bottom: 0; width: 50%; }
-.standing-character--duke { left: 0; }
-.standing-character--duchess { right: 0; }
+.standing-character { top: 41.5%; bottom: 45.5%; z-index: 2; }
+.standing-character--duke { left: 0; width: 32%; }
+.standing-character--duchess { right: 0; width: 28%; z-index: 3; }
 .art-link:focus-visible { outline-offset: -4px; }
 .art-link__hint { position: absolute; left: 50%; bottom: 10px; transform: translateX(-50%); max-width: calc(100% - 16px); width: max-content; padding: 6px 10px; border: 1px solid var(--gold); background: var(--ink); color: var(--gold-bright); font: 500 14px/1.2 var(--label); text-align: center; opacity: 0; pointer-events: none; }
 .art-link:focus-visible .art-link__hint { opacity: 1; }
