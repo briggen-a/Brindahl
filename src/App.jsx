@@ -19,7 +19,6 @@ function Landing({ onPlanetTap }) {
       </a>)}
     </div>
     <GuestbookLink /><BottomNav page="home" />
-    <p className="hero-subline">Two worlds. One dynasty.<br />An extremely consequential dance.</p>
   </>;
 }
 

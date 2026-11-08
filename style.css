@@ -40,7 +40,7 @@ p, li, dd { overflow-wrap: break-word; }
 .icon-button { width: 44px; height: 44px; display: grid; place-items: center; border: 0; background: transparent; color: var(--gold); }
 .landing-header { text-align: center; padding: 16px 5px 0; position: relative; }
 .landing-header .eyebrow { font-size: clamp(9px, 2.4cqi, 13px); color: #eee9df; letter-spacing: .22em;  }
-.landing-header h1 { text-transform: uppercase; font: 400 clamp(40px, 13.2cqi, 67px)/1.2 var(--display); letter-spacing: .065em; color: #e5bd8f; margin: 3px 0 5px; text-shadow: 0 1px 0 #4d2e1a; }
+.landing-header h1 { text-transform: uppercase; font: 400 clamp(40px, 13.2cqi, 67px)/1.2 var(--display); letter-spacing: .065em; color: #e5bd8f; margin: clamp(-7px, -1.4cqi, -4px) 0 clamp(-9px, -1.8cqi, -5px); text-shadow: 0 1px 0 #4d2e1a; }
 .tagline { text-transform: uppercase; font: 400 clamp(9px, 2.6cqi, 13px)/1.3 Arial, sans-serif; letter-spacing: .2em; display: flex; justify-content: center; gap: 9px; white-space: nowrap; }
 .tagline span { color: var(--gold-bright); }
 .landing-scene { position: relative; margin: 12px -5px 0; }
@@ -69,7 +69,6 @@ p, li, dd { overflow-wrap: break-word; }
 .bottom-nav span { font: 400 clamp(9px, 2.5cqi, 12px)/1.2 Arial, sans-serif; text-transform: uppercase; letter-spacing: .05em; color: #edeae1; }
 .bottom-nav a[aria-current='page']::after { content: ''; position: absolute; bottom: -9px; width: 30px; height: 2px; background: var(--gold-bright); }
 .bottom-nav a:hover { color: #fff1b9; }
-.hero-subline { margin: 16px 18px 2px; text-align: center; color: var(--muted); font: 400 12px/1.45 var(--label); letter-spacing: .04em; }
 .house-header { position: relative; text-align: center; padding: 7px 0 9px; }
 .back-link { position: absolute; top: 18px; left: 0; display: flex; align-items: center; min-height: 44px; color: var(--gold-bright); font: 500 16px var(--label); text-transform: uppercase; }
 .house-seal { display: block; width: 65px; margin: 0 auto 9px; }
